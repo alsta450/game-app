@@ -26,7 +26,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: yourusername/appname:latest
+        tags: ${{ secrets.DOCKER_USERNAME }}/game-app:1.0.0
 
     - name: Run the image
-      run: docker run yourusername/appname:latest
+      run: docker run ${{ secrets.DOCKER_USERNAME }}/game-app:1.0.0
