@@ -47,7 +47,6 @@ jobs:
         context: .  # Dies sollte auf das Wurzelverzeichnis des Repos zeigen
         file: Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/game-app:0.0.1
+        tags: ${{ secrets.DOCKER_USERNAME }}/game-app:1.0.0
 
-    - name: Run the image
-      run: docker run ${{ secrets.DOCKER_USERNAME }}/game-app:0.0.1
+
