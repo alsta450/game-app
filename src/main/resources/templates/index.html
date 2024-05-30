@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Guess the Number Game</h1>
+<div th:if="${playerGuess != null}">
+    <form th:action="@{/randomNumber/game}" method="post">
+        <input type="hidden" th:value="${playerGuess.id}" name="id"/>
+        <label for="guess">Enter your guess:</label>
+        <input type="number" id="guess" name="guess" min="1" max="100" required/>
+        <button type="submit">Guess</button>
+        <a href="/randomNumber/highscore">Highscores</a>
+    </form>
+    <div th:if="${message != null}">
+        <p th:text="${message}"></p>
+    </div>
+</div>
+</body>
+</html>

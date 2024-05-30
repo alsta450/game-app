@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Highscores</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+  <h1>Highscores</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Target Number</th>
+      <th>Tries</th>
+      <th>Message</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="guess : ${highscores}">
+      <td th:text="${guess.id}">1</td>
+      <td th:text="${guess.targetNumber}">50</td>
+      <td th:text="${guess.tries}">3</td>
+      <td th:text="${guess.message}">You guessed the number!</td>
+    </tr>
+    </tbody>
+  </table>
+  <a href="/randomNumber">Start a New Game</a>
+</div>
+</body>
+</html>

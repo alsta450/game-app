@@ -16,4 +16,4 @@ ADD ${JAR_FILE} app.jar
 # Run the jar file
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /app.jar"]
 
-LABEL version="1.0.1"
+LABEL version="1.1.0"
