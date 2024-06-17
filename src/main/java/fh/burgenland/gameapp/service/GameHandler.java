@@ -32,6 +32,7 @@ public class GameHandler {
         playerGuess.setTries(0);
         playerGuess.setFinished(false);
         playerGuess.setUserId((String) user.getAttributes().get("sub"));
+        playerGuess.setName((String) user.getAttributes().get("name"));
         playerGuessRepository.save(playerGuess);
         return playerGuess;
     }

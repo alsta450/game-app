@@ -10,7 +10,7 @@
   <table>
     <thead>
     <tr>
-      <th>ID</th>
+      <th>User</th>
       <th>Target Number</th>
       <th>Tries</th>
       <th>Message</th>
@@ -18,7 +18,7 @@
     </thead>
     <tbody>
     <tr th:each="guess : ${highscores}">
-      <td th:text="${guess.id}">1</td>
+      <td th:text="${guess.getName()}">Username</td>
       <td th:text="${guess.targetNumber}">50</td>
       <td th:text="${guess.tries}">3</td>
       <td th:text="${guess.message}">You guessed the number!</td>

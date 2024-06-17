@@ -19,6 +19,8 @@ public class PlayerGuess {
     private boolean finished;
     private String userId;
 
+    private String name;
+
     // Getters and Setters
 
     public Long getId() {
@@ -75,5 +77,13 @@ public class PlayerGuess {
 
     public void setUserId(String username) {
         this.userId = username;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
