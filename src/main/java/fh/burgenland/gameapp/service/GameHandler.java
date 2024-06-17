@@ -4,6 +4,8 @@ import fh.burgenland.gameapp.dataaccess.PlayerGuessRepository;
 import fh.burgenland.gameapp.model.PlayerGuess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,16 +26,19 @@ public class GameHandler {
     private final Random random = new Random();
 
     public PlayerGuess createNewGame() {
+        OAuth2User user = ((OAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         PlayerGuess playerGuess = new PlayerGuess();
         playerGuess.setTargetNumber(random.nextInt(100) + 1);
         playerGuess.setTries(0);
         playerGuess.setFinished(false);
+        playerGuess.setUserId((String) user.getAttributes().get("sub"));
         playerGuessRepository.save(playerGuess);
         return playerGuess;
     }
 
     public String checkGuess(Long id, int guess) {
-        Optional<PlayerGuess> playerGuessOptional = playerGuessRepository.findById(id);
+        OAuth2User user = ((OAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        Optional<PlayerGuess> playerGuessOptional = playerGuessRepository.findByIdAndUserId(id, (String) user.getAttributes().get("sub"));
         if (playerGuessOptional.isPresent()) {
             PlayerGuess playerGuess = playerGuessOptional.get();
             playerGuess.setTries(playerGuess.getTries() + 1);
@@ -57,7 +62,8 @@ public class GameHandler {
     }
 
     public List<PlayerGuess> getFinishedGames() {
-        return playerGuessRepository.findByFinishedTrue(Sort.by(Sort.Direction.ASC, "tries")); // Sort by tries in ascending order
+        OAuth2User user = ((OAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        return playerGuessRepository.findByFinishedTrueAndUserId(Sort.by(Sort.Direction.ASC, "tries"), (String) user.getAttributes().get("sub")); // Sort by tries in ascending order
     }
 }
 

@@ -13,6 +13,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .oauth2Client()
+                .and()
+                .oauth2Login()
+                .tokenEndpoint()
+                .and()
+                .userInfoEndpoint();
+        http
                 .authorizeHttpRequests(authorize -> authorize
                         .anyRequest().authenticated()
                 )

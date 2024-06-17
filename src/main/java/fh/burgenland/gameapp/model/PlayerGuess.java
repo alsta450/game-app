@@ -16,7 +16,8 @@ public class PlayerGuess {
     private int playerGuess;
     private int tries;
     private String message;
-    private boolean finished; // New field to indicate if the game is finished
+    private boolean finished;
+    private String userId;
 
     // Getters and Setters
 
@@ -66,5 +67,13 @@ public class PlayerGuess {
 
     public void setFinished(boolean finished) {
         this.finished = finished;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String username) {
+        this.userId = username;
     }
 }
